@@ -21,5 +21,6 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r"shut_down/", views.shutDown),
+    url(r"launch_youtube/", views.launchYoutube),
     path("", views.index),
 ]
