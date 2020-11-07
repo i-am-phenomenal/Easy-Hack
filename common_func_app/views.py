@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By 
 from .models import SearchText
+from selenium.webdriver import ActionChains
 
 
 def index(request): 
@@ -16,7 +17,6 @@ def index(request):
 def shutDown(request): 
     os.system("shutdown /s /t 1")
     return render(request, "home.html", {})
-
 
 @csrf_exempt
 def launchYoutube(request):
@@ -31,10 +31,14 @@ def launchYoutube(request):
             driver.maximize_window()
             searchBar = driver.find_element_by_xpath("//input[@id='search']")
             searchBar.send_keys(text)
-            searchButton = driver.find_element_by_xpath("//button[@id='search-icon-legacy']")
-            searchButton.click()
+            searchBar.send_keys(Keys.ENTER)
+            # ActionChains(driver).move_to_element(searchBar).click(searchBar).perform()
+            # searchButton = driver.find_element_by_xpath("//button[@id='search-icon-legacy']")
+            # searchButton.click()
             driver.implicitly_wait(15)
-            videoElement = driver.find_element_by_xpath("//img[@id='img']")
-            videoElement.click()
+            driver.find_element_by_xpath("//a[@id='video-title']").click()
+            # driver.find_element_by_id("video-title").click()
+            # videoElement = driver.find_element_by_xpath("//img[@id='img']")
+            # videoElement.click()
     return render(request, "home.html", {})
         
