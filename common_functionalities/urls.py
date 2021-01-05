@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r"shut_down/", views.shutDown),
     url(r"launch_youtube/", views.launchYoutube),
-    path("", views.index),
+    url(r"send_notification/", views.sendNotification),
+    # url(r"", views.allowNotifications),
 ]
